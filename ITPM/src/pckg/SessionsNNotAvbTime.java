@@ -395,6 +395,7 @@ public class SessionsNNotAvbTime {
 					
 					Statement sta = connection.createStatement();
 					int x = sta.executeUpdate(query);
+					
 			
 					
 					JOptionPane.showMessageDialog(null, "Sucessfully Inserted");
