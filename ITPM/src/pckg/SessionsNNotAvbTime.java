@@ -70,7 +70,7 @@ public class SessionsNNotAvbTime {
 		frame.getContentPane().add(txtpnSessionsAndNot);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(38, 135, 1002, 392);
+		tabbedPane.setBounds(147, 134, 1002, 392);
 		frame.getContentPane().add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
@@ -449,7 +449,7 @@ public class SessionsNNotAvbTime {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_4.setBounds(396, 570, 197, 29);
+		btnNewButton_4.setBounds(542, 570, 197, 29);
 		frame.getContentPane().add(btnNewButton_4);
 	}
 }
