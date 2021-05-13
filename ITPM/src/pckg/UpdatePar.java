@@ -33,7 +33,7 @@ public class UpdatePar {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void updatePar(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,19 +58,21 @@ public class UpdatePar {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().setBackground(new Color(243,235,242));
 		frame.setBounds(100, 100, 1274, 671);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		txtpnManageTag.setEditable(false);
 		txtpnManageTag.setForeground(Color.BLACK);
-		txtpnManageTag.setBounds(246, 30, 671, 41);
+		txtpnManageTag.setBounds(396, 30, 671, 41);
 		txtpnManageTag.setText("UPDATE AND DELETE NON PARALLEL SESSIONS");
 		txtpnManageTag.setBackground(new Color(243,235,242));
 		txtpnManageTag.setFont(new Font("Times New Roman", Font.BOLD, 25));
 		frame.getContentPane().add(txtpnManageTag);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(101, 88, 996, 200);
+		scrollPane.setBounds(169, 93, 996, 200);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -100,18 +102,18 @@ public class UpdatePar {
 		txtpnTagName.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
 		txtpnTagName.setText("Starting Time");
 		txtpnTagName.setBackground(new Color(243,235,242));
-		txtpnTagName.setBounds(101, 309, 228, 41);
+		txtpnTagName.setBounds(169, 309, 228, 41);
 		frame.getContentPane().add(txtpnTagName);
 		
 		txtpnTagCode = new JTextPane();
 		txtpnTagCode.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
 		txtpnTagCode.setText("Duration");
 		txtpnTagCode.setBackground(new Color(243,235,242));
-		txtpnTagCode.setBounds(101, 418, 146, 41);
+		txtpnTagCode.setBounds(169, 408, 146, 41);
 		frame.getContentPane().add(txtpnTagCode);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(101, 351, 228, 29);
+		comboBox.setBounds(169, 351, 228, 29);
 		frame.getContentPane().add(comboBox);
 		
 		btnNewButton = new JButton("Update");
@@ -119,7 +121,7 @@ public class UpdatePar {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(161, 573, 115, 29);
+		btnNewButton.setBounds(181, 573, 115, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Delete");
@@ -127,7 +129,7 @@ public class UpdatePar {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_1.setBounds(391, 573, 115, 29);
+		btnNewButton_1.setBounds(482, 573, 115, 29);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("Clear");
@@ -135,48 +137,48 @@ public class UpdatePar {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_2.setBounds(592, 573, 115, 29);
+		btnNewButton_2.setBounds(789, 573, 115, 29);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		btnNewButton_3 = new JButton("Home");
-		btnNewButton_3.setBounds(801, 573, 115, 29);
+		btnNewButton_3.setBounds(1050, 570, 115, 29);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(101, 465, 228, 29);
+		comboBox_1.setBounds(169, 465, 228, 29);
 		frame.getContentPane().add(comboBox_1);
 		
 		JTextPane txtpnSubGroupId = new JTextPane();
 		txtpnSubGroupId.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
 		txtpnSubGroupId.setText("Day");
 		txtpnSubGroupId.setBackground(new Color(243,235,242));
-		txtpnSubGroupId.setBounds(522, 309, 200, 41);
+		txtpnSubGroupId.setBounds(569, 309, 200, 41);
 		frame.getContentPane().add(txtpnSubGroupId);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(522, 351, 221, 29);
+		comboBox_2.setBounds(569, 351, 221, 29);
 		frame.getContentPane().add(comboBox_2);
 		
 		JTextPane txtpnGroupId = new JTextPane();
 		txtpnGroupId.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
 		txtpnGroupId.setText("Subject 1");
 		txtpnGroupId.setBackground(new Color(243,235,242));
-		txtpnGroupId.setBounds(522, 418, 247, 41);
+		txtpnGroupId.setBounds(569, 408, 247, 41);
 		frame.getContentPane().add(txtpnGroupId);
 		
 		comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(522, 465, 221, 29);
+		comboBox_3.setBounds(569, 465, 221, 29);
 		frame.getContentPane().add(comboBox_3);
 		
 		JTextPane txtpnSubject = new JTextPane();
 		txtpnSubject.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
 		txtpnSubject.setText("Subject 2");
 		txtpnSubject.setBackground(new Color(243,235,242));
-		txtpnSubject.setBounds(844, 309, 184, 39);
+		txtpnSubject.setBounds(1007, 309, 184, 39);
 		frame.getContentPane().add(txtpnSubject);
 		
 		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(844, 348, 184, 34);
+		comboBox_4.setBounds(1007, 348, 184, 34);
 		frame.getContentPane().add(comboBox_4);
 		
 

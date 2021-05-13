@@ -194,6 +194,16 @@ public class SessionsNNotAvbTime {
 		panel_1.add(btnNewButton_5);
 		
 		JButton btnNewButton_6 = new JButton("View");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				    UpdatePar par = new UpdatePar();
+					
+					par.updatePar();
+					frame.setVisible(false);
+				
+			}
+		});
 		btnNewButton_6.setBounds(723, 190, 115, 29);
 		panel_1.add(btnNewButton_6);
 		
@@ -204,22 +214,19 @@ public class SessionsNNotAvbTime {
 		
 		JTextPane txtpnLecture = new JTextPane();
 		txtpnLecture.setBackground(new Color(230, 230, 250));
-		txtpnLecture.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnLecture.setText("           Lecture");
+		txtpnLecture.setText("                     Lecture");
 		txtpnLecture.setBounds(191, 60, 197, 40);
 		panel.add(txtpnLecture);
 		
 		JTextPane txtpnTutorial = new JTextPane();
 		txtpnTutorial.setBackground(new Color(230, 230, 250));
-		txtpnTutorial.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnTutorial.setText("           Tutorial");
+		txtpnTutorial.setText("                    Tutorial");
 		txtpnTutorial.setBounds(191, 134, 197, 40);
 		panel.add(txtpnTutorial);
 		
 		JTextPane txtpnLab = new JTextPane();
 		txtpnLab.setBackground(new Color(230, 230, 250));
-		txtpnLab.setText("               Lab");
-		txtpnLab.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
+		txtpnLab.setText("                          Lab");
 		txtpnLab.setBounds(191, 201, 197, 40);
 		panel.add(txtpnLab);
 		
@@ -293,6 +300,16 @@ public class SessionsNNotAvbTime {
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("View");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				    UpdateConsecutive con = new UpdateConsecutive();
+					
+					con.updateCon();
+					frame.setVisible(false);
+				
+			}
+		});
 		btnNewButton_1.setBounds(518, 313, 115, 29);
 		panel.add(btnNewButton_1);
 		
@@ -304,30 +321,26 @@ public class SessionsNNotAvbTime {
 		JTextPane txtpnSubject = new JTextPane();
 		txtpnSubject.setBackground(new Color(230, 230, 250));
 		txtpnSubject.setForeground(Color.BLACK);
-		txtpnSubject.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnSubject.setText("            Subject 1");
+		txtpnSubject.setText("Subject 1");
 		txtpnSubject.setBounds(122, 48, 221, 39);
 		panel_2.add(txtpnSubject);
 		
 		JTextPane txtpnSubject_1 = new JTextPane();
 		txtpnSubject_1.setBackground(new Color(230, 230, 250));
-		txtpnSubject_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnSubject_1.setText("               Subject 2");
+		txtpnSubject_1.setText("Subject 2");
 		txtpnSubject_1.setForeground(Color.BLACK);
 		txtpnSubject_1.setBounds(423, 48, 221, 39);
 		panel_2.add(txtpnSubject_1);
 		
 		JTextPane txtpnSubject_2 = new JTextPane();
 		txtpnSubject_2.setBackground(new Color(230, 230, 250));
-		txtpnSubject_2.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnSubject_2.setText("             Subject 3");
+		txtpnSubject_2.setText("Subject 3");
 		txtpnSubject_2.setBounds(122, 176, 221, 39);
 		panel_2.add(txtpnSubject_2);
 		
 		JTextPane txtpnSubject_3 = new JTextPane();
 		txtpnSubject_3.setBackground(new Color(230, 230, 250));
-		txtpnSubject_3.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		txtpnSubject_3.setText("              Subject 4");
+		txtpnSubject_3.setText("Subject 4");
 		txtpnSubject_3.setBounds(423, 176, 221, 39);
 		panel_2.add(txtpnSubject_3);
 		
@@ -416,6 +429,15 @@ public class SessionsNNotAvbTime {
 		panel_2.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("View");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 UpdateNonOver nonOver = new UpdateNonOver();
+				 nonOver.nonOver();
+				 frame.setVisible(false);
+				
+			}
+		});
 		btnNewButton_3.setBounds(423, 301, 115, 29);
 		panel_2.add(btnNewButton_3);
 		

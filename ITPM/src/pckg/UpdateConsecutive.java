@@ -34,7 +34,7 @@ public class UpdateConsecutive {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void updateCon(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,6 +59,7 @@ public class UpdateConsecutive {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().setBackground(new Color(243,235,242));
 		frame.setBounds(100, 100, 1033, 656);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

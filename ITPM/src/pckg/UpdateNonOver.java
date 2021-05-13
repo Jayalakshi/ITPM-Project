@@ -34,7 +34,7 @@ public class UpdateNonOver {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void nonOver() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,10 +59,12 @@ public class UpdateNonOver {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.getContentPane().setBackground(new Color(243,235,242));
 		frame.setBounds(100, 100, 1207, 712);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		txtpnManageTag.setEditable(false);
 		txtpnManageTag.setForeground(Color.BLACK);
 		txtpnManageTag.setBounds(246, 30, 671, 41);
 		txtpnManageTag.setText("UPDATE AND DELETE NON OVERLAPPING SESSIONS");
