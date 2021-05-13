@@ -236,7 +236,7 @@ public class SessionsNNotAvbTime {
 		panel.add(comboBox);
 		comboBox.addItem("IP lecture");
 		comboBox.addItem("OOP lecture");
-		comboBox.addItem("MC lecrure");
+		comboBox.addItem("MC lecture");
 		comboBox.addItem("PAF lecture");
 		comboBox.addItem("MAD lecture");
 		comboBox.setSelectedItem(null);
