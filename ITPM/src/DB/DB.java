@@ -80,7 +80,7 @@ public class DB {
         username = p.getProperty("User_Name");
         password = p.getProperty("Password");
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             c = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + dbName + "?useUnicode=true&characterEncoding=UTF-8&useSSL=false", "" + username + "", "" + password + "");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -93,14 +93,14 @@ public class DB {
         if (c == null) {
             setUpConnection();
         }
-        c.createStatement().executeUpdate(sql);
+        c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY).executeUpdate(sql);
     }
 
     public static ResultSet search(String sql) throws Exception {
         if (c == null) {
             setUpConnection();
         }
-        return c.createStatement().executeQuery(sql);
+        return c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 
     }
 
