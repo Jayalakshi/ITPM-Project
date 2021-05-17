@@ -1,4 +1,4 @@
-package Bandara;
+package pckg;
 
 import java.awt.EventQueue;
 import java.awt.Color;
