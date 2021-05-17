@@ -1,4 +1,4 @@
-package pckg;
+package Bandara;
 
 import java.awt.EventQueue;
 import java.awt.Color;
@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 
@@ -246,7 +247,37 @@ public class Chart extends JPanel {
 		frame.getContentPane().add(btnNewButton);
 		
 
-		
+		try {
+            ResultSet rs = DB.DB.search("select count(l.name) from lecturer l where l.`status`='Active'");
+            if (rs.next()) {
+            	textField.setText(rs.getString(1));
+            }
+            ResultSet rs2 = DB.DB.search("select count(l.name) from students l");
+            if (rs2.next()) {
+            	textField_1.setText(rs2.getString(1));
+            }
+            ResultSet rs3 = DB.DB.search("select count(l.name) from subjects l where l.`status`='Active'");
+            if (rs3.next()) {
+            	textField_2.setText(rs3.getString(1));
+            }
+            ResultSet rs4 = DB.DB.search("select count(l.name) from rooms l where l.`status`='Active'");
+            if (rs4.next()) {
+            	textField_3.setText(rs4.getString(1));
+            }
+            ResultSet rs5 = DB.DB.search("select l.name from lecturer l where l.`status`='Active'");
+            while (rs5.next()) {
+            	txtMssamanRathnayake.setText(rs5.getString(1));
+            }
+            ResultSet rs6 = DB.DB.search("select groupno from student_groups l where l.`status`='Active'");
+            while (rs6.next()) {
+            	txtYs.setText(rs6.getString(1));
+            }
+            ResultSet rs7 = DB.DB.search("select l.name from subjects l where l.`status`='Active'");
+            while (rs7.next()) {
+            	txtOop.setText(rs7.getString(1));
+            }
+        } catch (Exception e) {
+        }
 		
 	}
 }

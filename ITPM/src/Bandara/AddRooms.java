@@ -1,4 +1,4 @@
-package pckg;
+package Bandara;
 
 import java.awt.EventQueue;
 
@@ -54,8 +54,8 @@ public class AddRooms {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBackground(new Color(243,235,242));
-		frame.getContentPane().setBackground(new Color(135, 206, 235));
+		frame.setBackground(new Color(243, 235, 242));
+		frame.getContentPane().setBackground(new Color(243, 235, 242));
 		frame.setBounds(100, 100, 1028, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -70,7 +70,7 @@ public class AddRooms {
 		frame.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
+		panel.setBackground(new Color(243, 235, 242));
 		tabbedPane.addTab("Sessions", null, panel, null);
 		panel.setLayout(null);
 		
@@ -134,7 +134,7 @@ public class AddRooms {
 		panel.add(btnNewButton_6);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBackground(new Color(243, 235, 242));
 		tabbedPane.addTab("Consecutive Session", null, panel_1, null);
 		panel_1.setLayout(null);
 		

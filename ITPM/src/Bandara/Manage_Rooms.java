@@ -1,19 +1,25 @@
-package pckg;
+package Bandara;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.Choice;
 import java.awt.Label;
 import java.awt.Panel;
+import java.sql.ResultSet;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Manage_Rooms {
 
@@ -108,7 +114,7 @@ public class Manage_Rooms {
 		
 		JLabel lblNewLabel_2 = new JLabel("Select Group");
 		lblNewLabel_2.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_2.setBounds(391, 68, 122, 35);
+		lblNewLabel_2.setBounds(391, 55, 122, 35);
 		panel_2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_5 = new JLabel("Select Session");
@@ -121,24 +127,56 @@ public class Manage_Rooms {
 		panel_2.add(choice_4);
 		
 		Label label = new Label("Select Room");
+		label.setBounds(391, 104, 122, 27);
+		panel_2.add(label);
 		label.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		label.setBounds(10, 291, 122, 27);
-		panel.add(label);
 		
 		Choice choice_5 = new Choice();
-		choice_5.setBounds(154, 292, 206, 26);
-		panel.add(choice_5);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(144, 182, 414, 100);
-		panel.add(textPane);
-		
-		JLabel lblNewLabel_6 = new JLabel("Selected Sessions");
-		lblNewLabel_6.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_6.setBounds(10, 146, 147, 37);
-		panel.add(lblNewLabel_6);
+		choice_5.setBounds(535, 105, 206, 20);
+		panel_2.add(choice_5);
 		
 		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String subjectid="";
+					String tagid="";
+					String lecturerid="";
+					String groupid="";
+					String roomid="";
+					ResultSet rs1 = DB.DB.search("select idsubjects from subjects where name='" + choice_2.getSelectedItem().toString() + "'");
+	                if (rs1.first()) {
+	                    subjectid = rs1.getString(1);
+	                }
+	                ResultSet rs2 = DB.DB.search("select idtags from tags where name='" + choice.getSelectedItem().toString() + "'");
+	                if (rs2.first()) {
+	                	tagid = rs2.getString(1);
+	                }
+	                ResultSet rs3 = DB.DB.search("select idlecturer from lecturer where name='" + choice_1.getSelectedItem().toString() + "'");
+	                if (rs3.first()) {
+	                	lecturerid = rs3.getString(1);
+	                }
+	                ResultSet rs4 = DB.DB.search("select idstudent_groups from student_groups where groupno='" + choice_3.getSelectedItem().toString() + "'");
+	                if (rs4.first()) {
+	                	groupid = rs4.getString(1);
+	                }
+	                ResultSet rs5 = DB.DB.search("select idsession_rooms from rooms where name='" + choice_5.getSelectedItem().toString() + "'");
+	                if (rs5.first()) {
+	                	roomid = rs5.getString(1);
+	                }
+	                String sessionsid=choice_4.getSelectedItem().toString();
+	                DB.DB.iud("insert into sessions(subject, group_id, tag, lecturer1, rooms_id, status) values('"+subjectid+"','"+groupid+"','"+tagid+"','"+lecturerid+"','"+roomid+"','deactive')");
+		            JOptionPane.showMessageDialog(null, "Succesfully inserted");
+//		            choice_2.setSelectedItem("<-Select->");
+//		            choice.setSelectedItem("<-Select->");
+//		            choice_1.setSelectedItem("<-Select->");
+//		            choice_3.setSelectedItem("<-Select->");
+//		            choice_5.setSelectedItem("<-Select->");
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 		btnNewButton.setBounds(772, 209, 192, 29);
 		panel.add(btnNewButton);
 		
@@ -150,7 +188,7 @@ public class Manage_Rooms {
 		btnNewButton_2.setBounds(772, 310, 192, 29);
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_7 = new JButton("Viwe Added Sessions");
+		JButton btnNewButton_7 = new JButton("View Added Sessions");
 		btnNewButton_7.setBounds(772, 276, 192, 29);
 		panel.add(btnNewButton_7);
 		
@@ -177,12 +215,23 @@ public class Manage_Rooms {
 		choice_7.setBounds(567, 41, 201, 26);
 		panel_3.add(choice_7);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBackground(new Color(248, 248, 255));
-		textPane_1.setBounds(216, 126, 362, 108);
-		panel_3.add(textPane_1);
-		
 		JButton btnNewButton_3 = new JButton("Submit");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String roomid="";
+					ResultSet rs5 = DB.DB.search("select idsession_rooms from rooms where name='" + choice_7.getSelectedItem().toString() + "'");
+	                if (rs5.first()) {
+	                	roomid = rs5.getString(1);
+	                }
+	                String sessionsid=choice_6.getSelectedItem().toString();
+	                DB.DB.iud("insert into consecutive_temp(lecture_sessions_id, rooms_id, status) values('"+sessionsid+"','"+roomid+"','deactive')");
+		            JOptionPane.showMessageDialog(null, "Succesfully inserted");
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_3.setBounds(707, 126, 183, 29);
 		panel_3.add(btnNewButton_3);
 		
@@ -194,13 +243,47 @@ public class Manage_Rooms {
 		btnNewButton_5.setBounds(707, 261, 183, 29);
 		panel_3.add(btnNewButton_5);
 		
-		JLabel lblNewLabel_9 = new JLabel("Selected Sessions");
-		lblNewLabel_9.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_9.setBounds(44, 167, 145, 26);
-		panel_3.add(lblNewLabel_9);
-		
 		JButton btnNewButton_6 = new JButton("View Added Sessions");
 		btnNewButton_6.setBounds(707, 216, 183, 29);
 		panel_3.add(btnNewButton_6);
+		
+		try {
+			choice_1.addItem("<-Select->");
+            ResultSet rs = DB.DB.search("select distinct name from lecturer");
+            while (rs.next()) {
+            	choice_1.addItem(rs.getString(1));
+            }
+            choice_3.addItem("<-Select->");
+            ResultSet rs2 = DB.DB.search("select groupno from student_groups");
+            while (rs2.next()) {
+            	choice_3.addItem(rs2.getString(1));
+            }
+            choice_4.addItem("<-Select->");
+            choice_6.addItem("<-Select->");
+            ResultSet rs3 = DB.DB.search("select idlecture_sessions from lecture_sessions");
+            while (rs3.next()) {
+            	choice_4.addItem(rs3.getString(1));
+            	choice_6.addItem(rs3.getString(1));
+            }
+            choice_2.addItem("<-Select->");
+            ResultSet rs4 = DB.DB.search("select name from subjects");
+            while (rs4.next()) {
+            	choice_2.addItem(rs4.getString(1));
+            }
+            choice.addItem("<-Select->");
+            ResultSet rs5 = DB.DB.search("select name from tags");
+            while (rs5.next()) {
+            	choice.addItem(rs5.getString(1));
+            }
+            choice_5.addItem("<-Select->");
+            choice_7.addItem("<-Select->");
+            ResultSet rs6 = DB.DB.search("select name from rooms");
+            while (rs6.next()) {
+            	choice_5.addItem(rs6.getString(1));
+            	choice_7.addItem(rs6.getString(1));
+            }
+            
+        } catch (Exception e) {
+        }
 	}
 }

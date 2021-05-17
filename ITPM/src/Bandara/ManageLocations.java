@@ -1,4 +1,4 @@
-package pckg;
+package Bandara;
 
 import java.awt.EventQueue;
 
@@ -204,8 +204,8 @@ public class ManageLocations {
 		panel_1.add(btnNewButton_3);
 		
 		JButton btnNewButton_12 = new JButton("Add");
-		btnNewButton_12.setBackground(Color.RED);
-		btnNewButton_12.setForeground(Color.DARK_GRAY);
+	
+	
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
