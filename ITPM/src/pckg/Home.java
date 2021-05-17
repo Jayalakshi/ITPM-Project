@@ -1,4 +1,4 @@
-package location;
+package pckg;
 
 import java.awt.EventQueue;
 
