@@ -163,6 +163,16 @@ public class AddTag {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Home");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+                Home home = new Home();
+				
+				home.main(null);
+				frame.setVisible(false);
+				
+			}
+		});
 		btnNewButton_2.setBounds(681, 513, 185, 29);
 		frame.getContentPane().add(btnNewButton_2);
 		

@@ -266,6 +266,12 @@ public class AddStudentGroups extends JFrame{
 		JButton btnNewButton_3 = new JButton("Home");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				Home home = new Home();
+				
+				home.main(null);
+				frame.setVisible(false);
+				
 			}
 		});
 		btnNewButton_3.setBounds(614, 550, 151, 29);

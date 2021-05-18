@@ -447,6 +447,12 @@ public class SessionsNNotAvbTime {
 		JButton btnNewButton_4 = new JButton("Home");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+                Home home = new Home();
+				
+				home.main(null);
+				frame.setVisible(false);
+				
 			}
 		});
 		btnNewButton_4.setBounds(542, 570, 197, 29);

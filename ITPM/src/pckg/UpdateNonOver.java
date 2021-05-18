@@ -139,6 +139,16 @@ public class UpdateNonOver {
 		comboBox.setSelectedItem(null);
 		
 		btnNewButton_3 = new JButton("Home");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+                Home home = new Home();
+				
+				home.main(null);
+				frame.setVisible(false);
+				
+			}
+		});
 		btnNewButton_3.setBounds(1031, 573, 115, 29);
 		frame.getContentPane().add(btnNewButton_3);
 		
