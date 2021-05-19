@@ -16,10 +16,12 @@ import javax.swing.JComboBox;
 import java.awt.Button;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -201,6 +203,29 @@ public class GenerateTimeTable {
 		panel.add(btnNewButton);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+//				try {
+//				    if (! table.print()) {
+//				        System.err.println("User cancelled printing");
+//				    }
+//				} catch (java.awt.print.PrinterException e1) {
+//				    System.err.format("Cannot print %s%n", e1.getMessage());
+//				}
+//
+//				MessageFormat header = new MessageFormat("Page {0,number,integer}");
+//				try {
+//				    table.print(JTable.PrintMode.FIT_WIDTH, header, null);
+//				} catch (java.awt.print.PrinterException e2) {
+//				    System.err.format("Cannot print %s%n", e2.getMessage());
+//				}
+				
+				try {
+					table.print();
+				} catch (PrinterException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				
 			}
 		});
