@@ -204,21 +204,7 @@ public class GenerateTimeTable {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//				try {
-//				    if (! table.print()) {
-//				        System.err.println("User cancelled printing");
-//				    }
-//				} catch (java.awt.print.PrinterException e1) {
-//				    System.err.format("Cannot print %s%n", e1.getMessage());
-//				}
-//
-//				MessageFormat header = new MessageFormat("Page {0,number,integer}");
-//				try {
-//				    table.print(JTable.PrintMode.FIT_WIDTH, header, null);
-//				} catch (java.awt.print.PrinterException e2) {
-//				    System.err.format("Cannot print %s%n", e2.getMessage());
-//				}
-				
+ 			
 				try {
 					table.print();
 				} catch (PrinterException e1) {
@@ -258,6 +244,14 @@ public class GenerateTimeTable {
 		btnNewButton_3.setBounds(527, 16, 115, 29);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					table.print();
+				} catch (PrinterException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		panel_1.add(btnNewButton_3);
@@ -380,6 +374,19 @@ public class GenerateTimeTable {
 		comboBox_2.setSelectedItem(null);
 		
 		JButton btnNewButton_5 = new JButton("Print");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					table.print();
+				} catch (PrinterException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		btnNewButton_5.setBounds(524, 16, 115, 29);
 		panel_2.add(btnNewButton_5);
 		
@@ -477,8 +484,25 @@ public class GenerateTimeTable {
 		btnNewButton_4.setBounds(394, 15, 115, 29);
 		panel_2.add(btnNewButton_4);
 		
+		JButton btnNewButton_6 = new JButton("Back To Home");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+				    Home bht = new Home();
+				     bht.main(null);
+				} catch (Exception e2) {
+				 
+				}
+				
+			}
+		});
+		btnNewButton_6.setBounds(645, 607, 148, 29);
+		frame.getContentPane().add(btnNewButton_6);
+		
 		
 		frame.setBounds(100, 100, 1062, 740);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 }
