@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import net.proteanit.sql.DbUtils;
 
+
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -23,6 +24,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -303,124 +305,40 @@ public class Manage_Subject extends JFrame {
 		btnRefresh2.setBounds(851, 23, 129, 48);
 		frame4.getContentPane().add(btnRefresh2);
 		
+		
 		JButton btnSelect = new JButton("Select");
-		btnSelect.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-					int j = Table2.getSelectedRow();
-					DefaultTableModel model = (DefaultTableModel)Table2.getModel();
-					//TableModel model = Table1.getModel();
-					txtsubjectcode.setText(model.getValueAt(j, 0).toString());
-					txtsubjectname.setText(model.getValueAt(j, 1).toString());
-					String cmboffyear1 = model.getValueAt(j, 2).toString();
-					switch(cmboffyear1) {
-					case "Select":
-						cmboffyear.setSelectedIndex(0);
-						break;
-					case "1":
-						cmboffyear.setSelectedIndex(1);
-						break;
-					case "2":
-						cmboffyear.setSelectedIndex(2);
-						break;
-					case "3":
-						cmboffyear.setSelectedIndex(3);
-						break;
-					case "4":
-						cmboffyear.setSelectedIndex(4);
-						break;
-					}
-					
-					String cmboffsem1 = model.getValueAt(j, 3).toString();
-					switch(cmboffsem1) {
-					case "Select":
-						cmboffsem.setSelectedIndex(0);
-						break;
-					case "1":
-						cmboffsem.setSelectedIndex(1);
-						break;
-					case "2":
-						cmboffsem.setSelectedIndex(2);
-						break;
-					
-					}
-					
-					String cmblecHrs1 = model.getValueAt(j, 4).toString();
-					switch(cmblecHrs1) {
-					case "Select":
-						cmblecHrs.setSelectedIndex(0);
-						break;
-					case "1":
-						cmblecHrs.setSelectedIndex(1);
-						break;
-					case "2":
-						cmblecHrs.setSelectedIndex(2);
-						break;
-					case "3":
-						cmblecHrs.setSelectedIndex(3);
-						break;
-					
-					}
-					
-					String cmbtuteHrs1 = model.getValueAt(j, 5).toString();
-					switch(cmbtuteHrs1) {
-					case "Select":
-						cmbtuteHrs.setSelectedIndex(0);
-						break;
-					case "1":
-						cmbtuteHrs.setSelectedIndex(1);
-						break;
-					case "2":
-						cmbtuteHrs.setSelectedIndex(2);
-						break;
-					case "3":
-						cmbtuteHrs.setSelectedIndex(3);
-						break;
-					
-					}
-					
-					String cmblabHrs1 = model.getValueAt(j, 6).toString();
-					switch(cmblabHrs1) {
-					case "Select":
-						cmblabHrs.setSelectedIndex(0);
-						break;
-					case "1":
-						cmblabHrs.setSelectedIndex(1);
-						break;
-					case "2":
-						cmblabHrs.setSelectedIndex(2);
-						break;
-					case "3":
-						cmblabHrs.setSelectedIndex(3);
-						break;
-					
-					}
-					
-					String cmbevalHrs1 = model.getValueAt(j, 7).toString();
-					switch(cmbevalHrs1) {
-					case "Select":
-						cmbevalHrs.setSelectedIndex(0);
-						break;
-					case "1":
-						cmbevalHrs.setSelectedIndex(1);
-						break;
-					case "2":
-						cmbevalHrs.setSelectedIndex(2);
-						break;
-					case "3":
-						cmbevalHrs.setSelectedIndex(3);
-						break;
-					
-					}
-					
-					
-					
-			}
-		});
 		btnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 DefaultTableModel dtm = (DefaultTableModel) Table2.getModel(); 
+	    			int selectedRowIndex = Table2.getSelectedRow(); 
+	    				String id = (String) dtm.getValueAt(selectedRowIndex, 0); 
+	    
+					try {  
+						Class.forName("com.mysql.cj.jdbc.Driver");
+			     	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+						Statement st = conn.createStatement();
+						 ResultSet r=st.executeQuery("select * from subject where subject_code='"+id+"'");
+						 while (r.next()) {  
+							 txtsubjectcode.setText(r.getString("subject_code"));
+							 txtsubjectname.setText(r.getString("subject_name"));
+							 cmboffyear.setSelectedItem(r.getString("offered_year"));  
+							 cmboffsem.setSelectedItem(r.getString("offered_semester"));
+							 cmblecHrs.setSelectedItem(r.getString("lecture_hour"));
+							 cmbtuteHrs.setSelectedItem(r.getString("tute_hour"));
+							 cmblabHrs.setSelectedItem(r.getString("lab_hour"));
+							 cmbevalHrs.setSelectedItem(r.getString("evaluation_hour"));
+						
+						 }
+
+						    conn.close();
+						    } catch (Exception erorr) {  
+						JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+						System.exit(0);  
+						} 
 			}
 		});
+	
+		
 		btnSelect.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnSelect.setBounds(781, 118, 167, 48);
 		frame4.getContentPane().add(btnSelect);
@@ -431,10 +349,10 @@ public class Manage_Subject extends JFrame {
 				 try {
 					 Class.forName("com.mysql.cj.jdbc.Driver");
 	             	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
-	             	  
+
 	             	   	int row = Table2.getSelectedRow();
 	             	   	String value=(Table2.getModel().getValueAt(row, 0).toString());
-	             		PreparedStatement ps=conn.prepareStatement("delete from subject where subject_code="+value);
+	             		PreparedStatement ps=conn.prepareStatement("delete from subject where subject_code='"+value+"'");
 		             	ps.executeUpdate();
 		         	  	table_load();
 		         	  	JOptionPane.showMessageDialog(null, "Your data deleted successfully!!!!!");
