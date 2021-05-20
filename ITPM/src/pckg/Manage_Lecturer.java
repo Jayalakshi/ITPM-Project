@@ -373,118 +373,37 @@ public class Manage_Lecturer extends JFrame {
 		frame2.getContentPane().add(btnRefresh);
 		
 		JButton btnEdit = new JButton("Select");
-		btnEdit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int i = Table1.getSelectedRow();
-				DefaultTableModel model = (DefaultTableModel)Table1.getModel();
-				//TableModel model = Table1.getModel();
-				txtempid.setText(model.getValueAt(i, 0).toString());
-				txtlectuerername.setText(model.getValueAt(i, 1).toString());
-				String cmbfaculty1 = model.getValueAt(i, 2).toString();
-				switch(cmbfaculty1) {
-				case "Select":
-					cmbfaculty.setSelectedIndex(0);
-					break;
-				case "Computing":
-					cmbfaculty.setSelectedIndex(1);
-					break;
-				case "Engineering":
-					cmbfaculty.setSelectedIndex(2);
-					break;
-				case "Business":
-					cmbfaculty.setSelectedIndex(3);
-					break;
-				case "Humanities & Sciences":
-					cmbfaculty.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmbdepartment1 = model.getValueAt(i, 3).toString();
-				switch(cmbdepartment1) {
-				case "Select":
-					cmbdepartment.setSelectedIndex(0);
-					break;
-				case "Information Technology":
-					cmbdepartment.setSelectedIndex(1);
-					break;
-				case "Civil Engineering":
-					cmbdepartment.setSelectedIndex(2);
-					break;
-				case "Business Analytics":
-					cmbdepartment.setSelectedIndex(3);
-					break;
-				case "Nursing":
-					cmbdepartment.setSelectedIndex(4);
-					break;
-				}
-				
-				String cnbcenter1 = model.getValueAt(i, 4).toString();
-				switch(cnbcenter1) {
-				case "Select":
-					cnbcenter.setSelectedIndex(0);
-					break;
-				case "Malabe":
-					cnbcenter.setSelectedIndex(1);
-					break;
-				case "Kandy":
-					cnbcenter.setSelectedIndex(2);
-					break;
-				case "Jaffna":
-					cnbcenter.setSelectedIndex(3);
-					break;
-				case "Metro":
-					cnbcenter.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmbbuilding1 = model.getValueAt(i, 5).toString();
-				switch(cmbbuilding1) {
-				case "Select":
-					cmbbuilding.setSelectedIndex(0);
-					break;
-				case "Main Building":
-					cmbbuilding.setSelectedIndex(1);
-					break;
-				case "New Building":
-					cmbbuilding.setSelectedIndex(2);
-					break;
-				
-				}
-				
-				String cmblevel1 = model.getValueAt(i, 6).toString();
-				switch(cmblevel1) {
-				case "Select":
-					cmblevel.setSelectedIndex(0);
-					break;
-				case "1":
-					cmblevel.setSelectedIndex(1);
-					break;
-				case "2":
-					cmblevel.setSelectedIndex(2);
-					break;
-				case "3":
-					cmblevel.setSelectedIndex(3);
-					break;
-				case "4":
-					cmblevel.setSelectedIndex(4);
-					break;
-				case "5":
-					cmblevel.setSelectedIndex(3);
-					break;
-				case "6":
-					cmblevel.setSelectedIndex(4);
-					break;
-				}
-				
-				txtrank.setText(model.getValueAt(i, 7).toString());
-				
-			}
-		});
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
+				DefaultTableModel dtm = (DefaultTableModel) Table1.getModel(); 
+    			int selectedRowIndex = Table1.getSelectedRow(); 
+    				String id = (String) dtm.getValueAt(selectedRowIndex, 0); 
+    
+				try {  
+					Class.forName("com.mysql.cj.jdbc.Driver");
+		     	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+					Statement st = conn.createStatement();
+					 ResultSet r=st.executeQuery("select * from lecturer where emp_id='"+id+"'");
+					 while (r.next()) {  
+						 txtempid.setText(r.getString("emp_id"));
+						 txtlectuerername.setText(r.getString("lecturer_name"));
+						 cmbfaculty.setSelectedItem(r.getString("faculty"));
+						 cmbdepartment.setSelectedItem(r.getString("department"));
+						 cnbcenter.setSelectedItem(r.getString("center"));
+						 cmbbuilding.setSelectedItem(r.getString("building"));
+						 cmblevel.setSelectedItem(r.getString("lecturer_level"));
+						 txtrank.setText(r.getString("lecturer_rank"));
+						 
+					 }
+
+					    conn.close();
+					    } catch (Exception erorr) {  
+					JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+					System.exit(0);  
+					} 
+		}
+	});
+
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnEdit.setBounds(745, 96, 129, 48);
 		frame2.getContentPane().add(btnEdit);
