@@ -16,11 +16,13 @@ import javax.swing.table.DefaultTableModel;
 
 import net.proteanit.sql.DbUtils;
 
+
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
@@ -34,6 +36,8 @@ public class Manage_Session {
 	private JTextField txtDuration;
 	private JTextField txt_No_Student;
 	private JTextField txtID;
+	private JTextField txt_time;
+	private JTextField textSearch;
 
 	public static void AddRowToJTable(Object[] dataRow) {
 		DefaultTableModel model = (DefaultTableModel)Table3.getModel();
@@ -45,7 +49,7 @@ public class Manage_Session {
 		try {
      	   Class.forName("com.mysql.cj.jdbc.Driver");
      	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
-     	   String sql = "select * from itpm.session";
+     	   String sql = "select * from itpm.session_detail";
      	 PreparedStatement ps = conn.prepareStatement(sql);
      	  
      	  
@@ -85,7 +89,7 @@ public class Manage_Session {
 		frame6 = new JFrame();
 		frame6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		frame6.getContentPane().setBackground(new Color(243,235,242));
-		frame6.setBounds(100, 100, 1109, 756);
+		frame6.setBounds(100, 100, 1109, 852);
 		frame6.getContentPane().setBackground(new Color(243,235,242));
 		frame6.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame6.getContentPane().setLayout(null);
@@ -136,19 +140,37 @@ public class Manage_Session {
 		cmb_lecturer1.setBounds(286, 370, 157, 28);
 		frame6.getContentPane().add(cmb_lecturer1);
 		cmb_lecturer1.addItem("Select");
-		cmb_lecturer1.addItem("Mr.Jagath Fernando");
-		cmb_lecturer1.addItem("Mrs.Shalini Silva");
-		cmb_lecturer1.addItem("Mr.Akila Perera");
-		cmb_lecturer1.addItem("Ms.Manjula Peris");
-		
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select lecturer_name from lecturer");
+		 while (r.next()) {  
+			 cmb_lecturer1.addItem(r.getString("lecturer_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
+	
 		JComboBox cmb_lecturer2 = new JComboBox();
 		cmb_lecturer2.setBounds(672, 370, 157, 28);
 		frame6.getContentPane().add(cmb_lecturer2);
 		cmb_lecturer2.addItem("Select");
-		cmb_lecturer2.addItem("Mr.Jagath Fernando");
-		cmb_lecturer2.addItem("Mrs.Shalini Silva");
-		cmb_lecturer2.addItem("Mr.Akila Perera");
-		cmb_lecturer2.addItem("Ms.Manjula Peris");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select lecturer_name from lecturer");
+		 while (r.next()) {  
+			 cmb_lecturer2.addItem(r.getString("lecturer_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
 		
 		JComboBox cmb_tag = new JComboBox();
 		cmb_tag.setBounds(286, 433, 157, 28);
@@ -162,19 +184,37 @@ public class Manage_Session {
 		cmbSubCode.setBounds(705, 492, 137, 28);
 		frame6.getContentPane().add(cmbSubCode);
 		cmbSubCode.addItem("Select");
-		cmbSubCode.addItem("IT1010");
-		cmbSubCode.addItem("IT1020");
-		cmbSubCode.addItem("IT1040");
-		cmbSubCode.addItem("IT1050");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select subject_code from subject");
+		 while (r.next()) {  
+			 cmbSubCode.addItem(r.getString("subject_code"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
 		
 		JComboBox cmbSubject = new JComboBox();
 		cmbSubject.setBounds(292, 551, 151, 28);
 		frame6.getContentPane().add(cmbSubject);
 		cmbSubject.addItem("Select");
-		cmbSubject.addItem("OOP");
-		cmbSubject.addItem("MC");
-		cmbSubject.addItem("OOC");
-		cmbSubject.addItem("DS");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select subject_name from subject");
+		 while (r.next()) {  
+			 cmbSubject.addItem(r.getString("subject_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
 		
 		JComboBox cmbGroup = new JComboBox();
 		cmbGroup.setBounds(292, 492, 151, 28);
@@ -216,28 +256,61 @@ public class Manage_Session {
 		txtID.setBounds(264, 310, 268, 28);
 		frame6.getContentPane().add(txtID);
 		
+		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Available Day");
+		lblNewLabel_1_1_1_1_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
+		lblNewLabel_1_1_1_1_1.setBounds(116, 611, 157, 31);
+		frame6.getContentPane().add(lblNewLabel_1_1_1_1_1);
+		
+		JComboBox cmb_day = new JComboBox();
+		cmb_day.setBounds(292, 611, 151, 28);
+		frame6.getContentPane().add(cmb_day);
+		cmb_day.addItem("Select");
+		cmb_day.addItem("Monday");
+		cmb_day.addItem("Tuesday");
+		cmb_day.addItem("Wednesday");
+		cmb_day.addItem("Thursday");
+		cmb_day.addItem("Friday");
+		
+		JLabel lblNewLabel_1_1_3_1 = new JLabel("Time");
+		lblNewLabel_1_1_3_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
+		lblNewLabel_1_1_3_1.setBounds(524, 611, 88, 31);
+		frame6.getContentPane().add(lblNewLabel_1_1_3_1);
+		
+		txt_time = new JTextField();
+		txt_time.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txt_time.setColumns(10);
+		txt_time.setBounds(691, 611, 151, 28);
+		frame6.getContentPane().add(txt_time);
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(98, 141, 685, 125);
 		frame6.getContentPane().add(scrollPane);
 		
 		Table3 = new JTable();
+		Table3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
 		Table3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		Table3.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"ID", "Lecturer_1", "Lecturer_2", "Tag", "Subject_code", "Subject", "Group", "Duration", "No_Of_Students"
+				"ID", "Lecturer_1", "Lecturer_2", "Tag", "Subject_code", "Subject", "Group", "Duration", "No_Of_Students", "Day", "Time"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, Object.class
+				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, Object.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -260,7 +333,7 @@ public class Manage_Session {
 	
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnBack.setBounds(95, 635, 129, 48);
+		btnBack.setBounds(98, 744, 129, 48);
 		frame6.getContentPane().add(btnBack);
 		
 		
@@ -269,36 +342,40 @@ public class Manage_Session {
 		btnUpdate5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-	             	   Class.forName("com.mysql.cj.jdbc.Driver");
+					
+				
+							 
+	             Class.forName("com.mysql.cj.jdbc.Driver");
 	             	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
 	             	   System.out.println("connected");
-	             		//int row = Table3.getSelectedRow();
-	             	  //	String value1=(Table3.getModel().getValueAt(row, 0).toString());
-	             	 
-	             	  PreparedStatement ps=conn.prepareStatement("UPDATE session SET lecturer_1=?, lecturer_2=?, tag=?, subject_code=?, subject=?, group=?, duration=?, no_student=? WHERE id=?");
+	             	   	PreparedStatement ps=conn.prepareStatement("UPDATE session_detail SET lecturer_1=?, lecturer_2=?, tag=?, sub_code=?, subject=?, grp_no=?, duration=?, no_student=?, day=?, time=? where sessionID=?");
 	             	  	ps.setString(1,cmb_lecturer1.getSelectedItem().toString());
-	             	   ps.setString(2,cmb_lecturer2.getSelectedItem().toString());
-	             	   ps.setString(3,cmb_tag.getSelectedItem().toString());
-	             	   ps.setString(4,cmbSubCode.getSelectedItem().toString());
-	             	   ps.setString(5,cmbSubject.getSelectedItem().toString());
+	             	  	ps.setString(2,cmb_lecturer2.getSelectedItem().toString());
+	             	  	ps.setString(3,cmb_tag.getSelectedItem().toString());
+	             	  	ps.setString(4,cmbSubCode.getSelectedItem().toString());
+	             	  	ps.setString(5,cmbSubject.getSelectedItem().toString());
 	             	   ps.setString(6,cmbGroup.getSelectedItem().toString());
 	             	   ps.setString(7,txtDuration.getText());
 	             	   ps.setString(8,txt_No_Student.getText());
-	             	   ps.setString(9,txtID.getText());
+	             	   ps.setString(9,cmb_day.getSelectedItem().toString());
+	             	   ps.setString(10,txt_time.getText());
+	             	   ps.setString(11,txtID.getText());
 	             	   ps.executeUpdate();
+	             	  table_load();
+		          		JOptionPane.showMessageDialog(null, "Record updated successfully!!!!!");
+		             	// table_load();
+		             	
+		             	
+		             	   
+		             	conn.close();
+		    					
+						 }catch(Exception e1) {
+							 System.out.println(e1);
+						 }
+					}
+				});
 	             	
-	             	 table_load();
-	             	 JOptionPane.showMessageDialog(null, "Record updated successfully!!!!!");
-	             	
-	             	   
-	             	conn.close();
-	    					
-					 }catch(Exception e1) {
-						 System.out.println(e1);
-					 }
-				}
-			});
-		btnUpdate5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	    btnUpdate5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnUpdate5.setBounds(793, 191, 129, 38);
 		frame6.getContentPane().add(btnUpdate5);
 		
@@ -311,7 +388,7 @@ public class Manage_Session {
 	             	  
 	             	   	int row = Table3.getSelectedRow();
 	             	   	String value=(Table3.getModel().getValueAt(row, 0).toString());
-	             		PreparedStatement ps=conn.prepareStatement("delete from session where id="+value);
+	             		PreparedStatement ps=conn.prepareStatement("delete from session_detail where sessionID="+value);
 		             	ps.executeUpdate();
 		         	  	table_load();
 		         	  	JOptionPane.showMessageDialog(null, "Your data deleted successfully!!!!!");
@@ -344,7 +421,7 @@ public class Manage_Session {
 				try {
 	              	   Class.forName("com.mysql.cj.jdbc.Driver");
 	              	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
-	              	   String sql = "select * from session";
+	              	   String sql = "select * from session_detail";
 	              	 PreparedStatement ps = conn.prepareStatement(sql);
 	              	   ResultSet rs = ps.executeQuery();
 	              	  Table3.setModel(DbUtils.resultSetToTableModel(rs));
@@ -366,130 +443,75 @@ public class Manage_Session {
 		btnSelect_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int k = Table3.getSelectedRow();
-				DefaultTableModel model = (DefaultTableModel)Table3.getModel();
-				//TableModel model = Table1.getModel();
-				txtID.setText(model.getValueAt(k, 0).toString());
-				String cmb_lecturer11 = model.getValueAt(k, 1).toString();
-				switch(cmb_lecturer11) {
-				case "Select":
-					cmb_lecturer1.setSelectedIndex(0);
-					break;
-				case "Mr.Jagath Fernando":
-					cmb_lecturer1.setSelectedIndex(1);
-					break;
-				case "Mrs.Shalini Silva":
-					cmb_lecturer1.setSelectedIndex(2);
-					break;
-				case "Mr.Akila Perera":
-					cmb_lecturer1.setSelectedIndex(3);
-					break;
-				case "Ms.Manjula Peris":
-					cmb_lecturer1.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmb_lecturer12 = model.getValueAt(k, 2).toString();
-				switch(cmb_lecturer12) {
-				case "Select":
-					cmb_lecturer1.setSelectedIndex(0);
-					break;
-				case "Mr.Jagath Fernando":
-					cmb_lecturer2.setSelectedIndex(1);
-					break;
-				case "Mrs.Shalini Silva":
-					cmb_lecturer2.setSelectedIndex(2);
-					break;
-				case "Mr.Akila Perera":
-					cmb_lecturer2.setSelectedIndex(3);
-					break;
-				case "Ms.Manjula Peris":
-					cmb_lecturer2.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmb_tag1 = model.getValueAt(k, 3).toString();
-				switch(cmb_tag1) {
-				case "Select":
-					cmb_tag.setSelectedIndex(0);
-					break;
-				case "Lecture":
-					cmb_tag.setSelectedIndex(1);
-					break;
-				case "Tutorial":
-					cmb_tag.setSelectedIndex(2);
-					break;
-				case "Lab":
-					cmb_tag.setSelectedIndex(3);
-					break;
-				}
-				
-				
-				String cmbSubCode1 = model.getValueAt(k, 4).toString();
-				switch(cmbSubCode1) {
-				case "Select":
-					cmbSubCode.setSelectedIndex(0);
-					break;
-				case "IT1010":
-					cmbSubCode.setSelectedIndex(1);
-					break;
-				case "IT1020":
-					cmbSubCode.setSelectedIndex(2);
-					break;
-				case "IT1040":
-					cmbSubCode.setSelectedIndex(3);
-					break;
-				case "IT1050":
-					cmbSubCode.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmbSubject1 = model.getValueAt(k, 5).toString();
-				switch(cmbSubject1) {
-				case "Select":
-					cmbSubject.setSelectedIndex(0);
-					break;
-				case "OOP":
-					cmbSubject.setSelectedIndex(1);
-					break;
-				case "MC":
-					cmbSubject.setSelectedIndex(2);
-					break;
-				case "OOC":
-					cmbSubject.setSelectedIndex(3);
-					break;
-				case "DS":
-					cmbSubject.setSelectedIndex(4);
-					break;
-				}
-				
-				String cmbGroup1 = model.getValueAt(k, 6).toString();
-				switch(cmbGroup1) {
-				case "Select":
-					cmbGroup.setSelectedIndex(0);
-					break;
-				case "Y1S1 IT.1":
-					cmbGroup.setSelectedIndex(1);
-					break;
-				case "Y1S1 IT.2":
-					cmbGroup.setSelectedIndex(2);
-					break;
-				case "Y2S1 IT.1":
-					cmbGroup.setSelectedIndex(3);
-					break;
-				case "Y2S2 IT.2":
-					cmbGroup.setSelectedIndex(4);
-					break;
-				}
-				
-				txtDuration.setText(model.getValueAt(k, 7).toString());
-				txt_No_Student.setText(model.getValueAt(k, 8).toString());
 			}
 		});
+		btnSelect_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 DefaultTableModel dtm = (DefaultTableModel) Table3.getModel(); 
+	    			int selectedRowIndex = Table3.getSelectedRow(); 
+	    				String sessionID = (String) dtm.getValueAt(selectedRowIndex, 0); 
+	    
+					try {  
+						Class.forName("com.mysql.cj.jdbc.Driver");
+			     	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+						Statement st = conn.createStatement();
+						 ResultSet r=st.executeQuery("select * from session_detail where sessionID='"+sessionID+"'");
+						 while (r.next()) {  
+							 txtID.setText(r.getString("sessionID"));
+							 cmb_lecturer1.setSelectedItem(r.getString("lecturer_1"));  
+							 cmb_lecturer2.setSelectedItem(r.getString("lecturer_2"));
+							 cmb_tag.setSelectedItem(r.getString("tag"));
+							 cmbSubCode.setSelectedItem(r.getString("sub_code"));
+							 cmbSubject.setSelectedItem(r.getString("subject"));
+							 cmbGroup.setSelectedItem(r.getString("grp_no"));
+							 txtDuration.setText(r.getString("duration"));
+							 txt_No_Student.setText(r.getString("no_student"));
+							 cmb_day.setSelectedItem(r.getString("day"));
+							 txt_time.setText(r.getString("time"));
+						 }
+
+						    conn.close();
+						    } catch (Exception erorr) {  
+						JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+						System.exit(0);  
+						} 
+			}
+		});
+	
 		btnSelect_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnSelect_3.setBounds(795, 145, 129, 38);
 		frame6.getContentPane().add(btnSelect_3);
 		
+		textSearch = new JTextField();
+		textSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textSearch.setColumns(10);
+		textSearch.setBounds(116, 100, 268, 28);
+		frame6.getContentPane().add(textSearch);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					Class.forName("com.mysql.cj.jdbc.Driver");
+			     	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+						Statement st = conn.createStatement();
+				        String query = "SELECT sessionID,lecturer_1,lecturer_2,subject FROM session_detail WHERE subject LIKE '%" + textSearch.getText() + "%'";
+				        ResultSet rs = st.executeQuery(query);
+				      Table3.setModel(DbUtils.resultSetToTableModel(rs)); 
+				    conn.close();
+				}
+				     catch (Exception e) { 
+				        JOptionPane.showMessageDialog(null,"Got an exception!");
+				        System.err.println(e.getMessage()); 
+				    }   
+			}
+		});
+		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSearch.setBounds(403, 97, 105, 31);
+		frame6.getContentPane().add(btnSearch);
+		
+		
+			
 		
 	}
 }
