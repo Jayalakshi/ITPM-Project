@@ -9,11 +9,16 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
@@ -23,6 +28,7 @@ public class Add_Session {
 	private JTextField txt_ID;
 	private JTextField txt_no_student;
 	private JTextField txt_duration;
+	private JTextField txtTime;
 
 	/**
 	 * Launch the application.
@@ -64,51 +70,71 @@ public class Add_Session {
 		
 		JLabel lblNewLabel_1 = new JLabel("1st Lecturer Name");
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(39, 194, 181, 31);
+		lblNewLabel_1.setBounds(24, 144, 181, 31);
 		frame5.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("2nd Lecturer Name");
 		lblNewLabel_1_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_1_1.setBounds(478, 194, 171, 31);
+		lblNewLabel_1_1.setBounds(468, 144, 171, 31);
 		frame5.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("ID");
 		lblNewLabel_1_2.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_1_2.setBounds(98, 124, 59, 31);
+		lblNewLabel_1_2.setBounds(77, 87, 59, 31);
 		frame5.getContentPane().add(lblNewLabel_1_2);
 		
 		JComboBox cmb__lecturer_1 = new JComboBox();
-		cmb__lecturer_1.setBounds(205, 204, 208, 28);
+		cmb__lecturer_1.setBounds(195, 149, 208, 28);
 		frame5.getContentPane().add(cmb__lecturer_1);
 		cmb__lecturer_1.addItem("Select");
-		cmb__lecturer_1.addItem("Mr.Jagath Fernando");
-		cmb__lecturer_1.addItem("Mrs.Shalini Silva");
-		cmb__lecturer_1.addItem("Mr.Akila Perera");
-		cmb__lecturer_1.addItem("Ms.Manjula Peris");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select lecturer_name from lecturer");
+		 while (r.next()) {  
+			 cmb__lecturer_1.addItem(r.getString("lecturer_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
+	
+		
+	
 		
 		JComboBox cmb__lecturer_2 = new JComboBox();
-		cmb__lecturer_2.setBounds(659, 197, 208, 28);
+		cmb__lecturer_2.setBounds(648, 149, 208, 28);
 		frame5.getContentPane().add(cmb__lecturer_2);
 		cmb__lecturer_2.addItem("Select");
-		cmb__lecturer_2.addItem("Mr.Jagath Fernando");
-		cmb__lecturer_2.addItem("Mrs.Shalini Silva");
-		cmb__lecturer_2.addItem("Mr.Akila Perera");
-		cmb__lecturer_2.addItem("Ms.Manjula Peris");
-		
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select lecturer_name from lecturer");
+		 while (r.next()) {  
+			 cmb__lecturer_2.addItem(r.getString("lecturer_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
 		
 		txt_ID = new JTextField();
 		txt_ID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txt_ID.setColumns(10);
-		txt_ID.setBounds(205, 127, 199, 28);
+		txt_ID.setBounds(172, 92, 199, 28);
 		frame5.getContentPane().add(txt_ID);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("Select Tag");
 		lblNewLabel_1_1_2.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
-		lblNewLabel_1_1_2.setBounds(492, 122, 129, 31);
+		lblNewLabel_1_1_2.setBounds(492, 87, 129, 31);
 		frame5.getContentPane().add(lblNewLabel_1_1_2);
 		
 		JComboBox cmbTag = new JComboBox();
-		cmbTag.setBounds(659, 128, 191, 28);
+		cmbTag.setBounds(626, 92, 191, 28);
 		frame5.getContentPane().add(cmbTag);
 		cmbTag.addItem("Select");
 		cmbTag.addItem("Lecture");
@@ -144,10 +170,19 @@ public class Add_Session {
 		cmb_subject.setBounds(224, 404, 208, 28);
 		frame5.getContentPane().add(cmb_subject);
 		cmb_subject.addItem("Select");
-		cmb_subject.addItem("OOP");
-		cmb_subject.addItem("MC");
-		cmb_subject.addItem("OOC");
-		cmb_subject.addItem("DS");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select subject_name from subject");
+		 while (r.next()) {  
+			 cmb_subject.addItem(r.getString("subject_name"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
 		
 		JLabel lblNewLabel_1_1_4 = new JLabel("No Of Students");
 		lblNewLabel_1_1_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
@@ -180,10 +215,47 @@ public class Add_Session {
 		cmb_subject_code.setBounds(715, 410, 124, 28);
 		frame5.getContentPane().add(cmb_subject_code);
 		cmb_subject_code.addItem("Select");
-		cmb_subject_code.addItem("IT1010");
-		cmb_subject_code.addItem("IT1020");
-		cmb_subject_code.addItem("IT1040");
-		cmb_subject_code.addItem("IT1050");
+		try {  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+ 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
+		Statement st = conn.createStatement();
+		 ResultSet r=st.executeQuery("select subject_code from subject");
+		 while (r.next()) {  
+			 cmb_subject_code.addItem(r.getString("subject_code"));  
+			 }
+			  conn.close();
+		    } catch (Exception e) {  
+		JOptionPane.showMessageDialog(null,"Failed to Connect to Database","Error Connection", JOptionPane.WARNING_MESSAGE);  
+		System.exit(0);  
+		} 
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Available Day");
+		lblNewLabel_1_3.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
+		lblNewLabel_1_3.setBounds(24, 222, 132, 31);
+		frame5.getContentPane().add(lblNewLabel_1_3);
+		
+		JComboBox cmb__Day = new JComboBox();
+		cmb__Day.setBounds(195, 225, 208, 28);
+		frame5.getContentPane().add(cmb__Day);
+		cmb__Day.addItem("Select");
+		cmb__Day.addItem("Monday");
+		cmb__Day.addItem("Tuesday");
+		cmb__Day.addItem("Wednesday");
+		cmb__Day.addItem("Thursday");
+		cmb__Day.addItem("Friday");
+		
+		
+		JLabel lblNewLabel_1_4 = new JLabel("Time");
+		lblNewLabel_1_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 20));
+		lblNewLabel_1_4.setBounds(523, 222, 98, 31);
+		frame5.getContentPane().add(lblNewLabel_1_4);
+		
+		txtTime = new JTextField();
+		txtTime.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtTime.setColumns(10);
+		txtTime.setBounds(644, 225, 199, 28);
+		frame5.getContentPane().add(txtTime);
+		
 		
 		JButton btnView2 = new JButton("View");
 		btnView2.addActionListener(new ActionListener() {
@@ -204,17 +276,20 @@ public class Add_Session {
 				String lecturer_1 = cmb__lecturer_1.getSelectedItem().toString();
 				String lecturer_2 = cmb__lecturer_2.getSelectedItem().toString();
 				String tag = cmbTag.getSelectedItem().toString();
-				String subject_code = cmb_subject_code.getSelectedItem().toString();
+				String sub_code = cmb_subject_code.getSelectedItem().toString();
 				String subject = cmb_subject.getSelectedItem().toString();
-				String group = cmb_grp.getSelectedItem().toString();
+				String grp_no = cmb_grp.getSelectedItem().toString();
 				String duration = txt_duration.getText();
 				String no_student = txt_no_student.getText();
+				String day = cmb__Day.getSelectedItem().toString();
+				String time = txtTime.getText();
+				
             	
 				try {
                 	   Class.forName("com.mysql.cj.jdbc.Driver");
                 	   Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/itpm","root","Abcd123#");
-                	   String query = "INSERT INTO session values('" + id + "','" + lecturer_1 + "','" + lecturer_2 + "','" + tag + "','" +
-                			   subject_code + "','" + subject + "','" + group + "','" + duration + "','" + no_student + "')";
+                	   String query = "INSERT INTO session_detail values('" + id + "','" + lecturer_1 + "','" + lecturer_2 + "','" + tag + "','" +
+                			   sub_code + "','" + subject + "','" + grp_no + "','" + duration + "','" + no_student + "','" + day + "','" + time + "')";
                 	   
                 	   Statement sta = conn.createStatement();
                        int x = sta.executeUpdate(query);
@@ -248,6 +323,8 @@ public class Add_Session {
 				cmb_grp.setSelectedIndex(0);
 				txt_duration.setText("");
 				txt_no_student.setText("");
+				cmb__Day.setSelectedIndex(0);
+				txtTime.setText("");
 			}
 		});
 		btnClear2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -256,5 +333,11 @@ public class Add_Session {
 		
 		
 		
+		
+		
+		
+		
 	}
 }
+
+		
